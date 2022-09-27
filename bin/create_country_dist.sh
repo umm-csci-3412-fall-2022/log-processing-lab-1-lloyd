@@ -3,7 +3,6 @@
 scriptloc="$(pwd)"
 tmpfile=$(mktemp -d)
 filename="$1_countries.txt"
-countries="$(cat etc/conutry_IP_map.txt)"
 cd "$tmpfile" || exit
 tmploc="$(pwd)"
 for file in $(ls "$scriptloc/$1")
