@@ -7,7 +7,10 @@ cd "$tmpfile" || exit
 tmploc="$(pwd)"
 for file in $(ls "$scriptloc/$1")
 do
-    awk 'match($0, /([A-Z].*)([" "].*)([" "].*)([" "].*)([" "].*)/, groups) {print groups[3]}' "$scriptloc/$1/$file/failed_login_data.txt" >> "$filename"
+    if [ -d "$scriptloc/$1/$file" ];
+    then
+	awk 'match($0, /([A-Z].*)([" "].*)([" "].*)([" "].*)([" "].*)/, groups) {print groups[3]}' "$scriptloc/$1/$file/failed_login_data.txt" >> "$filename"
+    fi
 done	    
 sort "$filename" > "${filename::-4}"_sorted.txt
 uniq -c "${filename::-4}"_sorted.txt > "${filename::-4}"_counted.txt
